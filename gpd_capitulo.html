@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPD — Capítulo DeMolay</title>
+<style>
+:root {
+  --navy: #1E2761;
+  --navy-2: #2a3580;
+  --amber: #F4A03A;
+  --amber-light: #fef3e2;
+  --teal: #028090;
+  --teal-light: #e1f5ee;
+  --cherry: #990011;
+  --cherry-light: #fff0f1;
+  --green: #1E7145;
+  --green-light: #e2efda;
+  --surface: #ffffff;
+  --surface-1: #f8f9fc;
+  --surface-2: #f0f2f8;
+  --border: #e2e6f0;
+  --border-strong: #c8cfe8;
+  --text: #1a1d2e;
+  --text-2: #4a5070;
+  --text-3: #8890b0;
+  --radius: 10px;
+  --shadow: 0 1px 4px rgba(30,39,97,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: var(--surface-1);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+}
+
+/* ── NAV ── */
+nav {
+  background: var(--navy);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  height: 52px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(30,39,97,0.3);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 2rem;
+}
+
+.nav-logo {
+  width: 30px;
+  height: 30px;
+  background: var(--amber);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+
+.nav-title {
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.nav-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 1px;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+}
+
+.tab-btn {
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all .15s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); }
+.tab-btn.active { background: rgba(255,255,255,0.15); color: #fff; }
+
+.semestre-badge {
+  margin-left: auto;
+  background: rgba(244,160,58,0.2);
+  color: var(--amber);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(244,160,58,0.3);
+}
+
+/* ── VIEWS ── */
+.view { display: none; padding: 1.5rem; max-width: 1200px; margin: 0 auto; }
+.view.active { display: block; }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+}
+
+.page-sub {
+  color: var(--text-2);
+  margin-top: 3px;
+  font-size: 13px;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.card-body { padding: 18px; }
+
+/* ── STATS ROW ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  box-shadow: var(--shadow);
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.stat-sub {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+
+/* ── PROGRESS BAR ── */
+.prog-wrap {
+  height: 6px;
+  background: var(--surface-2);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.prog-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--amber);
+  transition: width .4s ease;
+}
+
+/* ── MATRIX X ── */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.matrix-cell {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.matrix-cell-header {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.matrix-cell-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.matrix-center {
+  grid-column: 1 / -1;
+  background: var(--navy);
+  border: none;
+  color: #fff;
+  padding: 20px 24px;
+  text-align: center;
+  border-radius: var(--radius);
+}
+
+.matrix-center h2 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.matrix-center p {
+  font-size: 12px;
+  opacity: .6;
+}
+
+/* ── ITEM LISTS ── */
+.item-list { display: flex; flex-direction: column; gap: 8px; padding: 12px 16px; }
+
+.item-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+  position: relative;
+}
+
+.item-row:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 2px 8px rgba(30,39,97,0.07);
+}
+
+.item-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-meta {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+.item-prog {
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.item-pct {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-2);
+  text-align: right;
+  margin-bottom: 3px;
+}
+
+/* ── BADGE ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-navy { background: rgba(30,39,97,0.1); color: var(--navy); }
+.badge-amber { background: var(--amber-light); color: #7a4f0a; }
+.badge-teal { background: var(--teal-light); color: var(--teal); }
+.badge-green { background: var(--green-light); color: var(--green); }
+.badge-cherry { background: var(--cherry-light); color: var(--cherry); }
+.badge-gray { background: var(--surface-2); color: var(--text-2); }
+
+/* ── BTN ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  background: var(--surface);
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.btn:hover { background: var(--surface-2); border-color: var(--navy); }
+
+.btn-primary {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+.btn-primary:hover { background: var(--navy-2); }
+
+.btn-amber {
+  background: var(--amber);
+  color: #fff;
+  border-color: var(--amber);
+}
+
+.btn-sm { padding: 4px 9px; font-size: 11px; }
+
+/* ── COMISSOES ── */
+.comissoes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.comissao-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.comissao-header {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.comissao-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comissao-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* ── KANBAN ── */
+.kanban-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 12px;
+}
+
+.kanban-col {
+  background: var(--surface-1);
+  border-radius: 8px;
+  min-height: 80px;
+}
+
+.kanban-col-header {
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kanban-items { padding: 0 6px 8px; display: flex; flex-direction: column; gap: 6px; }
+
+.kanban-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: box-shadow .15s, border-color .15s;
+}
+
+.kanban-item:hover {
+  box-shadow: 0 2px 8px rgba(30,39,97,0.1);
+  border-color: var(--border-strong);
+}
+
+.kanban-item-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.kanban-item-meta {
+  font-size: 10px;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,15,40,0.5);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--surface);
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(10,15,40,0.25);
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.modal-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: var(--surface-2);
+  color: var(--text-2);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s;
+}
+
+.modal-close:hover { background: var(--border); }
+
+.modal-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; }
+.modal-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; justify-content: flex-end; }
+
+/* ── FORM ── */
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field-label { font-size: 12px; font-weight: 600; color: var(--text-2); }
+
+.field input,
+.field select,
+.field textarea {
+  padding: 8px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--surface);
+  outline: none;
+  transition: border-color .15s;
+  font-family: inherit;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(30,39,97,0.08);
+}
+
+.field textarea { resize: vertical; min-height: 70px; }
+
+/* ── TABS within card ── */
+.inner-tabs {
+  display: flex;
+  gap: 2px;
+  padding: 10px 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.inner-tab {
+  padding: 5px 12px 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-3);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all .15s;
+}
+
+.inner-tab.active { color: var(--navy); border-bottom-color: var(--navy); font-weight: 600; }
+.inner-tab:hover:not(.active) { color: var(--text-2); }
+
+/* ── COL COUNT BADGE ── */
+.col-count {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── EMPTY STATE ── */
+.empty {
+  text-align: center;
+  padding: 28px 16px;
+  color: var(--text-3);
+}
+
+.empty-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+  opacity: .5;
+}
+
+.empty p { font-size: 12px; margin-top: 4px; }
+
+/* ── DETAIL VIEW ── */
+.detail-section {
+  margin-bottom: 1.5rem;
+}
+
+.detail-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-3);
+  margin-bottom: 8px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 1rem;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.breadcrumb a {
+  color: var(--navy);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.breadcrumb a:hover { text-decoration: underline; }
+
+.sep { color: var(--border-strong); }
+
+/* ── RESPONSAVEL CHIP ── */
+.resp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 4px;
+  background: var(--surface-2);
+  border-radius: 20px;
+  font-size: 11px;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+
+.resp-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── HORIZON DIVIDER TABS ── */
+.horizon {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.horizon-tab {
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.horizon-tab.active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+/* ── KPI ROW ── */
+.kpi-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.kpi-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 11px;
+  color: var(--text-2);
+}
+
+.kpi-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── CONN LINE ── */
+.conn-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.conn-arrow {
+  color: var(--text-3);
+  font-size: 11px;
+}
+
+.conn-label {
+  font-size: 10px;
+  color: var(--text-3);
+  padding: 1px 6px;
+  background: var(--surface-2);
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+/* ── SWIPE STATUS ── */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: opacity .15s;
+}
+
+.status-pill:hover { opacity: .8; }
+
+/* ── TOAST ── */
+#toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--navy);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all .25s;
+  box-shadow: 0 4px 16px rgba(30,39,97,0.3);
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── COLOR STRIP ── */
+.strip {
+  width: 4px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo">DM</div>
+    <div>
+      <div class="nav-title">GPD Capítulo</div>
+      <div class="nav-sub">DeMolay</div>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showView('painel')">Painel</button>
+    <button class="tab-btn" onclick="showView('matrizx')">Matriz X</button>
+    <button class="tab-btn" onclick="showView('comissoes')">Comissões</button>
+    <button class="tab-btn" onclick="showView('rotina')">Rotina</button>
+    <button class="tab-btn" onclick="showView('config')">Configuração</button>
+  </div>
+  <div id="semestre-badge" class="semestre-badge">1º Sem 2025</div>
+</nav>
+
+<div id="painel" class="view active">
+  <div class="page-header">
+    <div class="page-title">Painel do Semestre</div>
+    <div class="page-sub">Acompanhe o progresso geral do Capítulo</div>
+  </div>
+  <div class="stats-row" id="stats-row"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.5rem">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">🎯 Metas Globais</div>
+        <button class="btn btn-sm" onclick="openModal('meta')">+ Meta</button>
+      </div>
+      <div id="metas-painel"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">⚡ Tarefas Recentes</div>
+      </div>
+      <div id="tarefas-recentes"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📊 Status por Comissão</div>
+    </div>
+    <div id="comissoes-status"></div>
+  </div>
+</div>
+
+<div id="matrizx" class="view">
+  <div class="page-header">
+    <div class="page-title">Matriz X — Hoshin Kanri</div>
+    <div class="page-sub">Visão completa do desdobramento estratégico do semestre</div>
+  </div>
+  <div class="matrix-grid" id="matrix-grid"></div>
+</div>
+
+<div id="comissoes" class="view">
+  <div id="comissoes-list-view">
+    <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between">
+      <div>
+        <div class="page-title">Comissões</div>
+        <div class="page-sub">Gerencie tarefas e acompanhe cada comissão</div>
+      </div>
+      <button class="btn btn-primary" onclick="openModal('tarefa')">+ Nova tarefa</button>
+    </div>
+    <div class="comissoes-grid" id="comissoes-grid"></div>
+  </div>
+
+  <div id="comissao-detail" style="display:none">
+    <div class="breadcrumb">
+      <a onclick="closeDetail()">Comissões</a>
+      <span class="sep">›</span>
+      <span id="detail-name"></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem">
+      <div id="detail-icon" class="comissao-icon" style="width:40px;height:40px;font-size:18px"></div>
+      <div>
+        <div style="font-size:18px;font-weight:600;color:var(--navy)" id="detail-name-h"></div>
+        <div style="font-size:12px;color:var(--text-3)" id="detail-presidente"></div>
+      </div>
+      <button class="btn btn-sm" onclick="openModal('tarefa')" style="margin-left:auto">+ Tarefa</button>
+    </div>
+
+    <div class="card" style="margin-bottom:1rem">
+      <div class="card-header">
+        <div class="card-title">🎯 Meta desdobrada</div>
+        <button class="btn btn-sm" onclick="openModal('meta-comissao')">Editar</button>
+      </div>
+      <div class="card-body">
+        <div id="detail-meta" style="font-size:13px;color:var(--text-2)">Nenhuma meta definida ainda.</div>
+        <div id="detail-kpis" class="kpi-row" style="padding:12px 0 0;border:none;margin-top:8px"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">📋 Kanban de Tarefas</div>
+        <div style="display:flex;gap:6px;align-items:center">
+          <select id="filtro-prioridade" onchange="renderDetailKanban()" style="font-size:11px;padding:3px 7px;border:1px solid var(--border);border-radius:5px;background:var(--surface);color:var(--text)">
+            <option value="">Todas prioridades</option>
+            <option value="alta">Alta</option>
+            <option value="media">Média</option>
+            <option value="baixa">Baixa</option>
+          </select>
+        </div>
+      </div>
+      <div class="kanban-cols" id="detail-kanban"></div>
+    </div>
+  </div>
+</div>
+
+<div id="rotina" class="view">
+  <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between">
+    <div>
+      <div class="page-title">Rotina Operacional</div>
+      <div class="page-sub">Atribuições individuais por cargo — o que cada um faz em cada reunião</div>
+    </div>
+    <button class="btn btn-primary" onclick="openModal('cargo')">+ Cargo</button>
+  </div>
+  <div id="cargos-list"></div>
+</div>
+
+<div id="config" class="view">
+  <div class="page-header">
+    <div class="page-title">Configuração</div>
+    <div class="page-sub">Personalize o GPD do seu Capítulo</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="card">
+      <div class="card-header"><div class="card-title">📅 Semestre</div></div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:12px">
+        <div class="field">
+          <label class="field-label">Nome do semestre</label>
+          <input type="text" id="cfg-semestre" placeholder="Ex: 1º Sem 2025">
+        </div>
+        <div class="field">
+          <label class="field-label">Mestre Conselheiro</label>
+          <input type="text" id="cfg-mc" placeholder="Nome do MC">
+        </div>
+        <div class="field">
+          <label class="field-label">1º Conselheiro</label>
+          <input type="text" id="cfg-1c" placeholder="Nome do 1ºC">
+        </div>
+        <div class="field">
+          <label class="field-label">2º Conselheiro</label>
+          <input type="text" id="cfg-2c" placeholder="Nome do 2ºC">
+        </div>
+        <div class="field">
+          <label class="field-label">Nome do Capítulo</label>
+          <input type="text" id="cfg-capitulo" placeholder="Nome do Capítulo">
+        </div>
+        <button class="btn btn-primary" onclick="saveConfig()">Salvar configuração</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🗑️ Dados</div></div>
+      <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+        <p style="font-size:12px;color:var(--text-2)">Atenção: as ações abaixo são irreversíveis.</p>
+        <button class="btn" onclick="exportData()">⬇ Exportar dados JSON</button>
+        <button class="btn" onclick="document.getElementById('import-file').click()">⬆ Importar dados JSON</button>
+        <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)">
+        <hr style="border:none;border-top:1px solid var(--border);margin:4px 0">
+        <button class="btn" style="color:var(--cherry);border-color:var(--cherry)" onclick="if(confirm('Limpar todos os dados?')){clearAll()}">🗑 Limpar todos os dados</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-meta">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Nova Meta Global</div>
+      <button class="modal-close" onclick="closeModal('modal-meta')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="field-label">Título da meta</label><input type="text" id="meta-titulo" placeholder="Ex: Aumentar engajamento dos membros"></div>
+      <div class="field"><label class="field-label">Por que é prioridade</label><textarea id="meta-porque" placeholder="Justificativa estratégica..."></textarea></div>
+      <div class="field"><label class="field-label">Como será medido (indicador)</label><input type="text" id="meta-indicador" placeholder="Ex: % de membros presentes por reunião"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="field"><label class="field-label">Valor atual</label><input type="text" id="meta-atual" placeholder="Ex: 50%"></div>
+        <div class="field"><label class="field-label">Meta</label><input type="text" id="meta-alvo" placeholder="Ex: 75%"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('modal-meta')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveMeta()">Salvar meta</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-tarefa">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Nova Tarefa</div>
+      <button class="modal-close" onclick="closeModal('modal-tarefa')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="field-label">Título</label><input type="text" id="tarefa-titulo" placeholder="O que precisa ser feito?"></div>
+      <div class="field"><label class="field-label">Comissão</label>
+        <select id="tarefa-comissao">
+          <option value="">Selecionar...</option>
+        </select>
+      </div>
+      <div class="field"><label class="field-label">Meta global relacionada</label>
+        <select id="tarefa-meta">
+          <option value="">Sem vínculo</option>
+        </select>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="field"><label class="field-label">Responsável</label><input type="text" id="tarefa-resp" placeholder="Nome do membro"></div>
+        <div class="field"><label class="field-label">Prazo</label><input type="date" id="tarefa-prazo"></div>
+      </div>
+      <div class="field"><label class="field-label">Prioridade</label>
+        <select id="tarefa-prioridade">
+          <option value="media">Média</option>
+          <option value="alta">Alta</option>
+          <option value="baixa">Baixa</option>
+        </select>
+      </div>
+      <div class="field"><label class="field-label">Observações</label><textarea id="tarefa-obs" placeholder="Detalhes adicionais..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('modal-tarefa')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveTarefa()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-cargo">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Atribuição de Cargo</div>
+      <button class="modal-close" onclick="closeModal('modal-cargo')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="field-label">Cargo</label><input type="text" id="cargo-nome" placeholder="Ex: Diácono, Mordomo, Orador..."></div>
+      <div class="field"><label class="field-label">Membro atual</label><input type="text" id="cargo-membro" placeholder="Nome do membro"></div>
+      <div class="field"><label class="field-label">O que faz na reunião/cerimônia</label><textarea id="cargo-reuniao" placeholder="Ex: Arruma o altar ao chegar..."></textarea></div>
+      <div class="field"><label class="field-label">O que faz continuamente (fora da reunião)</label><textarea id="cargo-continuo" placeholder="Ex: Mantém os itens do altar..."></textarea></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('modal-cargo')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveCargo()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-meta-comissao">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-mc-title">Meta da Comissão</div>
+      <button class="modal-close" onclick="closeModal('modal-meta-comissao')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="field"><label class="field-label">Meta desdobrada</label><textarea id="mc-meta" placeholder="Como esta comissão contribui para a meta global?"></textarea></div>
+      <div class="field"><label class="field-label">KPI 1</label><input type="text" id="mc-kpi1" placeholder="Ex: Realizar 3 eventos no semestre"></div>
+      <div class="field"><label class="field-label">KPI 2</label><input type="text" id="mc-kpi2" placeholder="Ex: Taxa de presença nos eventos > 70%"></div>
+      <div class="field"><label class="field-label">KPI 3</label><input type="text" id="mc-kpi3" placeholder="(opcional)"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeModal('modal-meta-comissao')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveMetaComissao()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-tarefa-detail">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="td-titulo">Tarefa</div>
+      <button class="modal-close" onclick="closeModal('modal-tarefa-detail')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px" id="td-badges"></div>
+      <div style="font-size:13px;color:var(--text-2)" id="td-obs"></div>
+      <div style="border-top:1px solid var(--border);padding-top:12px;margin-top:4px">
+        <div class="field-label" style="margin-bottom:8px">Alterar status</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap" id="td-status-btns"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" style="color:var(--cherry);border-color:var(--cherry)" onclick="deleteTarefa()">Excluir</button>
+      <button class="btn" onclick="closeModal('modal-tarefa-detail')">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const COMISSOES_PADRAO = [
+  { id:'marketing', name:'Marketing', icon:'📣', color:'#028090', presidente:'' },
+  { id:'eventos', name:'Eventos', icon:'🎉', color:'#F4A03A', presidente:'' },
+  { id:'ritualistica', name:'Ritualística', icon:'⚜️', color:'#1E2761', presidente:'' },
+  { id:'financas', name:'Finanças', icon:'💰', color:'#1E7145', presidente:'' },
+  { id:'membros', name:'Incremento de Membros', icon:'🤝', color:'#990011', presidente:'' },
+  { id:'hospitalaria', name:'Hospitalaria', icon:'❤️', color:'#D85A30', presidente:'' },
+  { id:'arquivologia', name:'Arquivologia', icon:'📁', color:'#534AB7', presidente:'' },
+];
+
+let state = {
+  config: { semestre:'1º Sem 2025', mc:'', '1c':'', '2c':'', capitulo:'Capítulo' },
+  comissoes: JSON.parse(JSON.stringify(COMISSOES_PADRAO)),
+  metas: [],
+  tarefas: [],
+  cargos: [],
+  comissoesMetas: {}
+};
+
+let currentComissao = null;
+let editingTarefa = null;
+
+function load() {
+  const saved = localStorage.getItem('gpd_demolay_v2');
+  if (saved) {
+    try { state = JSON.parse(saved); } catch(e) {}
+  }
+}
+
+function save() {
+  localStorage.setItem('gpd_demolay_v2', JSON.stringify(state));
+}
+
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const btns = document.querySelectorAll('.tab-btn');
+  const views = ['painel','matrizx','comissoes','rotina','config'];
+  const idx = views.indexOf(id);
+  if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+  renderView(id);
+}
+
+function renderView(id) {
+  if (id === 'painel') renderPainel();
+  if (id === 'matrizx') renderMatriz();
+  if (id === 'comissoes') renderComissoes();
+  if (id === 'rotina') renderRotina();
+  if (id === 'config') renderConfig();
+}
+
+function renderPainel() {
+  document.getElementById('semestre-badge').textContent = state.config.semestre || '1º Sem 2025';
+
+  const all = state.tarefas;
+  const done = all.filter(t => t.status === 'concluido');
+  const pct = all.length ? Math.round(done.length / all.length * 100) : 0;
+  const metas = state.metas;
+
+  document.getElementById('stats-row').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">Metas globais</div>
+      <div class="stat-value">${metas.length}</div>
+      <div class="stat-sub">definidas no semestre</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Tarefas totais</div>
+      <div class="stat-value">${all.length}</div>
+      <div class="stat-sub">${done.length} concluídas</div>
+      <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Em andamento</div>
+      <div class="stat-value">${all.filter(t=>t.status==='andamento').length}</div>
+      <div class="stat-sub">tarefas ativas</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Comissões ativas</div>
+      <div class="stat-value">${state.comissoes.length}</div>
+      <div class="stat-sub">no capítulo</div>
+    </div>
+  `;
+
+  const mp = document.getElementById('metas-painel');
+  if (!metas.length) {
+    mp.innerHTML = `<div class="empty"><div class="empty-icon">🎯</div><b>Nenhuma meta ainda</b><p>Defina as 2-3 prioridades do semestre</p></div>`;
+  } else {
+    mp.innerHTML = `<div class="item-list">${metas.map((m,i) => {
+      const ts = state.tarefas.filter(t => t.metaId === m.id);
+      const td = ts.filter(t=>t.status==='concluido');
+      const p2 = ts.length ? Math.round(td.length/ts.length*100) : 0;
+      return `<div class="item-row">
+        <div class="strip" style="background:${['#1E2761','#028090','#F4A03A'][i%3]}"></div>
+        <div class="item-left">
+          <div class="item-title">${m.titulo}</div>
+          <div class="item-meta">${m.indicador || 'Sem indicador'} • ${ts.length} tarefas</div>
+        </div>
+        <div class="item-prog">
+          <div class="item-pct">${p2}%</div>
+          <div class="prog-wrap"><div class="prog-fill" style="width:${p2}%;background:${['#1E2761','#028090','#F4A03A'][i%3]}"></div></div>
+        </div>
+      </div>`;
+    }).join('')}</div>`;
+  }
+
+  const recent = [...state.tarefas].sort((a,b)=>(b.id||0)-(a.id||0)).slice(0,5);
+  const tr = document.getElementById('tarefas-recentes');
+  if (!recent.length) {
+    tr.innerHTML = `<div class="empty"><div class="empty-icon">📋</div><b>Sem tarefas</b><p>Adicione tarefas nas comissões</p></div>`;
+  } else {
+    tr.innerHTML = `<div class="item-list">${recent.map(t => `
+      <div class="item-row" onclick="openTarefaDetail('${t.id}')">
+        <div class="item-left">
+          <div class="item-title">${t.titulo}</div>
+          <div class="item-meta">${getComissaoName(t.comissaoId)} ${t.prazo ? '• '+fmtDate(t.prazo) : ''}</div>
+        </div>
+        ${statusBadge(t.status)}
+      </div>`).join('')}</div>`;
+  }
+
+  const cs = document.getElementById('comissoes-status');
+  cs.innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border)">
+    ${state.comissoes.map(c => {
+      const ts = state.tarefas.filter(t => t.comissaoId === c.id);
+      const td = ts.filter(t=>t.status==='concluido');
+      const p3 = ts.length ? Math.round(td.length/ts.length*100) : 0;
+      return `<div style="background:var(--surface);padding:14px 16px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="font-size:16px">${c.icon}</span>
+          <span style="font-size:12px;font-weight:600;color:var(--text)">${c.name}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-bottom:5px">
+          <span>${td.length}/${ts.length} tarefas</span><span style="font-weight:600;color:var(--text-2)">${p3}%</span>
+        </div>
+        <div class="prog-wrap"><div class="prog-fill" style="width:${p3}%;background:${c.color}"></div></div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+function renderMatriz() {
+  const g = document.getElementById('matrix-grid');
+  const metas = state.metas;
+  const kpisGlobais = metas.flatMap(m => m.indicador ? [m.indicador] : []);
+  const iniciativas = state.comissoes.map(c => ({
+    name: c.name, icon: c.icon,
+    meta: state.comissoesMetas[c.id]?.meta || ''
+  }));
+
+  g.innerHTML = `
+    <div class="matrix-cell">
+      <div class="matrix-cell-header" style="background:rgba(30,39,97,0.05)">
+        <div class="matrix-cell-title" style="color:var(--navy)">🎯 Objetivos de Longo Prazo</div>
+        <span class="badge badge-navy">Sul</span>
+      </div>
+      <div class="item-list">
+        ${metas.length ? metas.map((m,i) => `
+          <div class="conn-line">
+            <span style="font-size:12px;font-weight:600;color:var(--navy)">${i+1}.</span>
+            <span style="font-size:12px;color:var(--text)">${m.titulo}</span>
+            ${m.alvo ? `<span class="conn-label">→ ${m.alvo}</span>` : ''}
+          </div>`).join('') :
+          '<div style="padding:12px;font-size:12px;color:var(--text-3);text-align:center">Sem metas globais — adicione no Painel</div>'
+        }
+      </div>
+    </div>
+
+    <div class="matrix-cell">
+      <div class="matrix-cell-header" style="background:rgba(2,128,144,0.05)">
+        <div class="matrix-cell-title" style="color:var(--teal)">📊 KPIs e Métricas</div>
+        <span class="badge badge-teal">Leste</span>
+      </div>
+      <div class="item-list">
+        ${kpisGlobais.length ? kpisGlobais.map(k => `
+          <div class="conn-line"><span style="font-size:11px">📈</span><span style="font-size:12px;color:var(--text)">${k}</span></div>`).join('') :
+          '<div style="padding:12px;font-size:12px;color:var(--text-3);text-align:center">Indicadores aparecem ao cadastrar metas</div>'
+        }
+        ${state.comissoes.flatMap(c => (state.comissoesMetas[c.id]?.kpis || []).filter(Boolean).map(k =>
+          `<div class="conn-line"><span style="color:${c.color};font-size:11px">${c.icon}</span><span style="font-size:12px;color:var(--text)">${k}</span><span class="conn-label">${c.name}</span></div>`
+        )).join('')}
+      </div>
+    </div>
+
+    <div class="matrix-center">
+      <div style="font-size:26px;margin-bottom:6px">⚜️</div>
+      <h2>${state.config.capitulo || 'Capítulo DeMolay'}</h2>
+      <p>${state.config.semestre || '1º Sem 2025'} · MC: ${state.config.mc || '—'}</p>
+    </div>
+
+    <div class="matrix-cell">
+      <div class="matrix-cell-header" style="background:rgba(244,160,58,0.07)">
+        <div class="matrix-cell-title" style="color:#7a4f0a">🗓️ Metas Anuais por Comissão</div>
+        <span class="badge badge-amber">Oeste</span>
+      </div>
+      <div class="item-list">
+        ${state.comissoes.map(c => {
+          const cm = state.comissoesMetas[c.id];
+          return `<div class="conn-line">
+            <span>${c.icon}</span>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:12px;font-weight:600;color:var(--text)">${c.name}</div>
+              <div style="font-size:11px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${cm?.meta || 'Sem meta definida'}</div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="matrix-cell" style="grid-column:1/-1">
+      <div class="matrix-cell-header" style="background:rgba(30,113,69,0.05)">
+        <div class="matrix-cell-title" style="color:var(--green)">🚀 Iniciativas e Responsáveis</div>
+        <span class="badge badge-green">Norte</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;padding:12px">
+        ${state.comissoes.map(c => {
+          const ts = state.tarefas.filter(t => t.comissaoId === c.id && t.status !== 'concluido');
+          return `<div style="background:var(--surface-1);border:1px solid var(--border);border-radius:8px;padding:10px">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+              <span style="width:6px;height:6px;border-radius:50%;background:${c.color};display:inline-block"></span>
+              <span style="font-size:12px;font-weight:600;color:var(--text)">${c.name}</span>
+            </div>
+            ${ts.slice(0,3).map(t => `<div style="font-size:11px;color:var(--text-2);padding:2px 0;border-left:2px solid ${c.color};padding-left:6px;margin-bottom:3px">${t.titulo}</div>`).join('')}
+            ${ts.length > 3 ? `<div style="font-size:10px;color:var(--text-3);margin-top:2px">+${ts.length-3} mais</div>` : ''}
+            ${!ts.length ? `<div style="font-size:11px;color:var(--text-3)">Sem iniciativas ativas</div>` : ''}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderComissoes() {
+  document.getElementById('comissoes-list-view').style.display = '';
+  document.getElementById('comissao-detail').style.display = 'none';
+
+  const g = document.getElementById('comissoes-grid');
+  g.innerHTML = state.comissoes.map(c => {
+    const ts = state.tarefas.filter(t => t.comissaoId === c.id);
+    const pend = ts.filter(t => t.status === 'pendente');
+    const and = ts.filter(t => t.status === 'andamento');
+    const done = ts.filter(t => t.status === 'concluido');
+    const pct = ts.length ? Math.round(done.length/ts.length*100) : 0;
+    return `
+      <div class="comissao-card">
+        <div class="comissao-header">
+          <div class="comissao-name">
+            <div class="comissao-icon" style="background:${c.color}22;font-size:15px">${c.icon}</div>
+            ${c.name}
+          </div>
+          <button class="btn btn-sm" onclick="openDetail('${c.id}')">Ver →</button>
+        </div>
+        <div style="padding:10px 14px 6px">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-bottom:5px">
+            <span>${ts.length} tarefas</span><span style="font-weight:600;color:var(--text-2)">${pct}%</span>
+          </div>
+          <div class="prog-wrap"><div class="prog-fill" style="width:${pct}%;background:${c.color}"></div></div>
+        </div>
+        <div class="kanban-cols" style="padding:8px 12px;grid-template-columns:repeat(3,1fr)">
+          <div style="text-align:center;padding:6px;background:var(--surface-1);border-radius:6px;border:1px solid var(--border)">
+            <div style="font-size:16px;font-weight:700;color:var(--text-2)">${pend.length}</div>
+            <div style="font-size:10px;color:var(--text-3)">Pendente</div>
+          </div>
+          <div style="text-align:center;padding:6px;background:rgba(244,160,58,0.06);border-radius:6px;border:1px solid rgba(244,160,58,0.2)">
+            <div style="font-size:16px;font-weight:700;color:#7a4f0a">${and.length}</div>
+            <div style="font-size:10px;color:var(--text-3)">Em andamento</div>
+          </div>
+          <div style="text-align:center;padding:6px;background:var(--green-light);border-radius:6px;border:1px solid rgba(30,113,69,0.2)">
+            <div style="font-size:16px;font-weight:700;color:var(--green)">${done.length}</div>
+            <div style="font-size:10px;color:var(--text-3)">Concluído</div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function openDetail(comissaoId) {
+  currentComissao = state.comissoes.find(c => c.id === comissaoId);
+  if (!currentComissao) return;
+  document.getElementById('comissoes-list-view').style.display = 'none';
+  document.getElementById('comissao-detail').style.display = '';
+  document.getElementById('detail-name').textContent = currentComissao.name;
+  document.getElementById('detail-name-h').textContent = currentComissao.name;
+  document.getElementById('detail-icon').textContent = currentComissao.icon;
+  document.getElementById('detail-icon').style.background = currentComissao.color + '22';
+  document.getElementById('detail-presidente').textContent =
+    currentComissao.presidente ? 'Presidente: ' + currentComissao.presidente : 'Presidente não definido';
+  const cm = state.comissoesMetas[comissaoId];
+  document.getElementById('detail-meta').textContent = cm?.meta || 'Nenhuma meta definida ainda.';
+  const kpis = cm?.kpis?.filter(Boolean) || [];
+  document.getElementById('detail-kpis').innerHTML = kpis.map(k =>
+    `<div class="kpi-tag"><div class="kpi-dot" style="background:${currentComissao.color}"></div>${k}</div>`
+  ).join('');
+  renderDetailKanban();
+}
+
+function renderDetailKanban() {
+  if (!currentComissao) return;
+  const filtro = document.getElementById('filtro-prioridade')?.value || '';
+  let ts = state.tarefas.filter(t => t.comissaoId === currentComissao.id);
+  if (filtro) ts = ts.filter(t => t.prioridade === filtro);
+  const cols = [
+    { id:'pendente', label:'Pendente', color:'var(--text-3)' },
+    { id:'andamento', label:'Em andamento', color:'#7a4f0a' },
+    { id:'concluido', label:'Concluído', color:'var(--green)' }
+  ];
+  const k = document.getElementById('detail-kanban');
+  k.innerHTML = cols.map(col => {
+    const items = ts.filter(t => t.status === col.id);
+    return `<div class="kanban-col">
+      <div class="kanban-col-header" style="color:${col.color}">
+        ${col.label}
+        <div class="col-count">${items.length}</div>
+      </div>
+      <div class="kanban-items">
+        ${items.length ? items.map(t => `
+          <div class="kanban-item" onclick="openTarefaDetail('${t.id}')">
+            <div class="kanban-item-title">${t.titulo}</div>
+            <div class="kanban-item-meta">
+              ${t.responsavel ? '👤 '+t.responsavel : ''}
+              ${t.prazo ? ' · '+fmtDate(t.prazo) : ''}
+              ${prioBadgeMini(t.prioridade)}
+            </div>
+          </div>`).join('') :
+          `<div style="text-align:center;padding:12px;font-size:11px;color:var(--text-3)">Vazio</div>`
+        }
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function closeDetail() {
+  currentComissao = null;
+  document.getElementById('comissoes-list-view').style.display = '';
+  document.getElementById('comissao-detail').style.display = 'none';
+}
+
+function renderRotina() {
+  const el = document.getElementById('cargos-list');
+  const cargos = state.cargos;
+  if (!cargos.length) {
+    el.innerHTML = `<div class="card"><div class="empty"><div class="empty-icon">⚜️</div><b>Nenhum cargo cadastrado</b><p>Adicione os cargos e suas atribuições para a rotina operacional</p></div></div>`;
+    return;
+  }
+  el.innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px">
+    ${cargos.map((c, i) => `
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">⚜️ ${c.nome}</div>
+          <div style="display:flex;gap:6px">
+            ${c.membro ? `<span class="resp-chip"><div class="resp-avatar">${c.membro.split(' ').map(x=>x[0]).join('').toUpperCase().slice(0,2)}</div>${c.membro}</span>` : ''}
+            <button class="btn btn-sm" onclick="deleteCargo(${i})" style="color:var(--cherry);border-color:transparent;padding:2px 6px">✕</button>
+          </div>
+        </div>
+        <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+          ${c.reuniao ? `<div>
+            <div class="detail-section-title">Na reunião / cerimônia</div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.5">${c.reuniao}</div>
+          </div>` : ''}
+          ${c.continuo ? `<div>
+            <div class="detail-section-title">Continuamente</div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.5">${c.continuo}</div>
+          </div>` : ''}
+        </div>
+      </div>`).join('')}
+  </div>`;
+}
+
+function renderConfig() {
+  document.getElementById('cfg-semestre').value = state.config.semestre || '';
+  document.getElementById('cfg-mc').value = state.config.mc || '';
+  document.getElementById('cfg-1c').value = state.config['1c'] || '';
+  document.getElementById('cfg-2c').value = state.config['2c'] || '';
+  document.getElementById('cfg-capitulo').value = state.config.capitulo || '';
+}
+
+function saveConfig() {
+  state.config = {
+    semestre: document.getElementById('cfg-semestre').value,
+    mc: document.getElementById('cfg-mc').value,
+    '1c': document.getElementById('cfg-1c').value,
+    '2c': document.getElementById('cfg-2c').value,
+    capitulo: document.getElementById('cfg-capitulo').value
+  };
+  save();
+  toast('Configuração salva');
+  document.getElementById('semestre-badge').textContent = state.config.semestre || '1º Sem 2025';
+}
+
+function openModal(type) {
+  if (type === 'meta') {
+    clearFields(['meta-titulo','meta-porque','meta-indicador','meta-atual','meta-alvo']);
+    document.getElementById('modal-meta').classList.add('open');
+  }
+  if (type === 'tarefa') {
+    clearFields(['tarefa-titulo','tarefa-resp','tarefa-obs']);
+    const cs = document.getElementById('tarefa-comissao');
+    cs.innerHTML = '<option value="">Selecionar...</option>' +
+      state.comissoes.map(c => `<option value="${c.id}"${currentComissao?.id===c.id?' selected':''}>${c.name}</option>`).join('');
+    const ms = document.getElementById('tarefa-meta');
+    ms.innerHTML = '<option value="">Sem vínculo</option>' +
+      state.metas.map(m => `<option value="${m.id}">${m.titulo}</option>`).join('');
+    document.getElementById('modal-tarefa').classList.add('open');
+  }
+  if (type === 'cargo') {
+    clearFields(['cargo-nome','cargo-membro','cargo-reuniao','cargo-continuo']);
+    document.getElementById('modal-cargo').classList.add('open');
+  }
+  if (type === 'meta-comissao' && currentComissao) {
+    document.getElementById('modal-mc-title').textContent = 'Meta — ' + currentComissao.name;
+    const cm = state.comissoesMetas[currentComissao.id] || {};
+    document.getElementById('mc-meta').value = cm.meta || '';
+    const kpis = cm.kpis || ['','',''];
+    document.getElementById('mc-kpi1').value = kpis[0] || '';
+    document.getElementById('mc-kpi2').value = kpis[1] || '';
+    document.getElementById('mc-kpi3').value = kpis[2] || '';
+    document.getElementById('modal-meta-comissao').classList.add('open');
+  }
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  editingTarefa = null;
+}
+
+function saveMeta() {
+  const titulo = document.getElementById('meta-titulo').value.trim();
+  if (!titulo) { toast('Informe o título da meta'); return; }
+  state.metas.push({
+    id: Date.now().toString(),
+    titulo,
+    porque: document.getElementById('meta-porque').value,
+    indicador: document.getElementById('meta-indicador').value,
+    atual: document.getElementById('meta-atual').value,
+    alvo: document.getElementById('meta-alvo').value
+  });
+  save();
+  closeModal('modal-meta');
+  toast('Meta adicionada');
+  renderPainel();
+}
+
+function saveTarefa() {
+  const titulo = document.getElementById('tarefa-titulo').value.trim();
+  const comissaoId = document.getElementById('tarefa-comissao').value;
+  if (!titulo || !comissaoId) { toast('Preencha título e comissão'); return; }
+  state.tarefas.push({
+    id: Date.now().toString(),
+    titulo,
+    comissaoId,
+    metaId: document.getElementById('tarefa-meta').value,
+    responsavel: document.getElementById('tarefa-resp').value,
+    prazo: document.getElementById('tarefa-prazo').value,
+    prioridade: document.getElementById('tarefa-prioridade').value,
+    obs: document.getElementById('tarefa-obs').value,
+    status: 'pendente'
+  });
+  save();
+  closeModal('modal-tarefa');
+  toast('Tarefa criada');
+  if (currentComissao) renderDetailKanban();
+  else renderComissoes();
+  renderPainel();
+}
+
+function saveCargo() {
+  const nome = document.getElementById('cargo-nome').value.trim();
+  if (!nome) { toast('Informe o nome do cargo'); return; }
+  state.cargos.push({
+    nome,
+    membro: document.getElementById('cargo-membro').value,
+    reuniao: document.getElementById('cargo-reuniao').value,
+    continuo: document.getElementById('cargo-continuo').value
+  });
+  save();
+  closeModal('modal-cargo');
+  toast('Cargo salvo');
+  renderRotina();
+}
+
+function saveMetaComissao() {
+  if (!currentComissao) return;
+  state.comissoesMetas[currentComissao.id] = {
+    meta: document.getElementById('mc-meta').value,
+    kpis: [
+      document.getElementById('mc-kpi1').value,
+      document.getElementById('mc-kpi2').value,
+      document.getElementById('mc-kpi3').value
+    ]
+  };
+  save();
+  closeModal('modal-meta-comissao');
+  toast('Meta da comissão salva');
+  openDetail(currentComissao.id);
+}
+
+function openTarefaDetail(id) {
+  editingTarefa = state.tarefas.find(t => t.id === id);
+  if (!editingTarefa) return;
+  document.getElementById('td-titulo').textContent = editingTarefa.titulo;
+  const badges = [];
+  badges.push(`<span class="badge badge-navy">${getComissaoName(editingTarefa.comissaoId)}</span>`);
+  if (editingTarefa.responsavel) badges.push(`<span class="resp-chip"><div class="resp-avatar">${editingTarefa.responsavel.split(' ').map(x=>x[0]).join('').toUpperCase().slice(0,2)}</div>${editingTarefa.responsavel}</span>`);
+  if (editingTarefa.prazo) badges.push(`<span class="badge badge-gray">📅 ${fmtDate(editingTarefa.prazo)}</span>`);
+  badges.push(prioBadgeFull(editingTarefa.prioridade));
+  document.getElementById('td-badges').innerHTML = badges.join('');
+  document.getElementById('td-obs').textContent = editingTarefa.obs || '';
+  document.getElementById('td-status-btns').innerHTML =
+    ['pendente','andamento','concluido'].map(s =>
+      `<button class="status-pill ${statusStyle(s)}" onclick="setTarefaStatus('${s}')">${statusLabel(s)}</button>`
+    ).join('');
+  document.getElementById('modal-tarefa-detail').classList.add('open');
+}
+
+function setTarefaStatus(status) {
+  if (!editingTarefa) return;
+  const t = state.tarefas.find(t => t.id === editingTarefa.id);
+  if (t) { t.status = status; save(); }
+  closeModal('modal-tarefa-detail');
+  toast('Status atualizado');
+  if (currentComissao) renderDetailKanban();
+  renderPainel();
+}
+
+function deleteTarefa() {
+  if (!editingTarefa) return;
+  if (!confirm('Excluir esta tarefa?')) return;
+  state.tarefas = state.tarefas.filter(t => t.id !== editingTarefa.id);
+  save();
+  closeModal('modal-tarefa-detail');
+  toast('Tarefa excluída');
+  if (currentComissao) renderDetailKanban();
+  renderComissoes();
+  renderPainel();
+}
+
+function deleteCargo(i) {
+  if (!confirm('Excluir este cargo?')) return;
+  state.cargos.splice(i, 1);
+  save();
+  renderRotina();
+  toast('Cargo removido');
+}
+
+function clearFields(ids) { ids.forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; }); }
+function getComissaoName(id) { return state.comissoes.find(c=>c.id===id)?.name || id; }
+function fmtDate(d) { if (!d) return ''; const [y,m,dia] = d.split('-'); return `${dia}/${m}/${y}`; }
+
+function statusBadge(s) {
+  const map = { pendente:['badge-gray','Pendente'], andamento:['badge-amber','Andamento'], concluido:['badge-green','Concluído'] };
+  const [cls,label] = map[s] || ['badge-gray',s];
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+
+function statusStyle(s) {
+  return s==='concluido' ? 'badge-green' : s==='andamento' ? 'badge-amber' : 'badge-gray';
+}
+
+function statusLabel(s) {
+  return s==='concluido' ? '✓ Concluído' : s==='andamento' ? '→ Em andamento' : '○ Pendente';
+}
+
+function prioBadgeMini(p) {
+  if (!p || p==='media') return '';
+  return p==='alta' ? ' · <span style="color:var(--cherry);font-size:10px;font-weight:700">● Alta</span>' : ' · <span style="color:var(--text-3);font-size:10px">● Baixa</span>';
+}
+
+function prioBadgeFull(p) {
+  if (p==='alta') return `<span class="badge badge-cherry">● Alta prioridade</span>`;
+  if (p==='baixa') return `<span class="badge badge-gray">● Baixa prioridade</span>`;
+  return `<span class="badge badge-gray">● Média prioridade</span>`;
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `gpd_demolay_${Date.now()}.json`;
+  a.click();
+  toast('Dados exportados');
+}
+
+function importData(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try {
+      state = JSON.parse(ev.target.result);
+      save();
+      toast('Dados importados');
+      renderView('painel');
+    } catch { toast('Erro ao importar'); }
+  };
+  r.readAsText(file);
+}
+
+function clearAll() {
+  state = {
+    config: { semestre:'1º Sem 2025', mc:'', '1c':'', '2c':'', capitulo:'Capítulo' },
+    comissoes: JSON.parse(JSON.stringify(COMISSOES_PADRAO)),
+    metas: [], tarefas: [], cargos: [], comissoesMetas: {}
+  };
+  save();
+  showView('painel');
+  toast('Dados limpos');
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+});
+
+load();
+renderPainel();
+</script>
+</body>
+</html>
